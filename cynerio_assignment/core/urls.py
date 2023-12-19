@@ -1,8 +1,9 @@
-from django.contrib import admin
-from django.urls import path, re_path
+from django.urls import re_path
 
-from cynerio_assignment.core.views import TaskView
+from cynerio_assignment.core.views import TaskView, CynerioTaskReportView
 
 urlpatterns = [
-    re_path('api/v1/task/', TaskView.as_view(), name='task'),
+    re_path(r'^api/v1/task/$', TaskView.as_view(), name='task'),
+    re_path(r'^api/v1/task_report/$', CynerioTaskReportView.as_view(), name='task_report'),
+
 ]
