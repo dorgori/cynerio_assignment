@@ -36,8 +36,11 @@ class TaskView(APIView):
 	# API to create tasks
 	def post(self, request: Request) -> Response:
 		try:
-			# TODO:check if name is already exist..
-			new_task = CynerioTask.objects.create(name=request.data.get('name'))
+			try:
+				task_name = self.validate_post_params(request)
+			except ValueError as e:
+				return Response(f'{e}', status=status.HTTP_400_BAD_REQUEST)
+			new_task = CynerioTask.objects.create(name=task_name)
 			serializer = CynerioTaskSerializer(new_task)
 			return Response(serializer.data, status=status.HTTP_201_CREATED)
 		except Exception as e:
@@ -71,18 +74,10 @@ class TaskView(APIView):
 
 			user = get_object_or_404(User, id=user_id)
 			requested_task = get_object_or_404(CynerioTask, id=task_id)
-			# TODO:move to validation function
-			if is_checkin:
-				# In case this user has already active task in progress
-				if UserCynerioTask.objects.filter(user=user, task__is_checkin=True).exists():
-					return Response(f'You already have a task in progress', status=status.HTTP_401_UNAUTHORIZED)
-				# In case user request a task which is already assigned to another user
-				if UserCynerioTask.objects.filter(task__id=task_id, task__is_checkin=True).exists():
-					return Response(f'This task is already assigned to another user', status=status.HTTP_401_UNAUTHORIZED)
-			else:
-				# In case user try to set inactive task as inactive
-				if not requested_task.is_checkin:
-					return Response(f'This task is already inactive', status=status.HTTP_401_UNAUTHORIZED)
+			try:
+				self.validate_logic(user, task_id, requested_task, is_checkin)
+			except ValueError as e:
+				return Response(f'{e}', status=status.HTTP_400_BAD_REQUEST)
 
 			requested_task.is_checkin = is_checkin
 			requested_task.save(user_id=user_id)
@@ -108,6 +103,30 @@ class TaskView(APIView):
 
 		return task_id, is_checkin
 
+	@staticmethod
+	def validate_logic(user, task_id, requested_task, is_checkin):
+		if is_checkin:
+			# In case this user has already active task in progress
+			if UserCynerioTask.objects.filter(user=user, task__is_checkin=True).exists():
+				raise ValueError(f'You already have a task in progress')
+			# In case user request a task which is already assigned to another user
+			if UserCynerioTask.objects.filter(task__id=task_id, task__is_checkin=True).exists():
+				raise ValueError(f'This task is already assigned to another user')
+		else:
+			# In case user try to set inactive task as inactive
+			if not requested_task.is_checkin:
+				raise ValueError(f'This task is already inactive')
+
+	@staticmethod
+	def validate_post_params(request: Request) -> Union[Tuple[int, bool], ValueError]:
+		task_name = request.data.get('name', '')
+		if not task_name:
+			raise ValueError('Missing name parameter')
+		if CynerioTask.objects.filter(name=task_name).exists():
+			raise ValueError(f'Task name {task_name} is already exists')
+
+		return task_name
+
 
 class CynerioTaskReportView(APIView):
 	http_method_names = ['get']
@@ -121,8 +140,10 @@ class CynerioTaskReportView(APIView):
 			users_tasks = UserCynerioTask.objects.filter(user__in=users)
 			users_report = 'User Report:'
 			for user in users:
-				users_report += f'\n User {user.username}:'
 				user_tasks = users_tasks.filter(user=user)
+				if not user_tasks:
+					continue
+				users_report += f'\n User {user.username}:'
 				for user_task in user_tasks:
 					time_spent = user_task.get_time_spent()
 					users_report += f'\n {user_task.task.name}: {time_spent}'

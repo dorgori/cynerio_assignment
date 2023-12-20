@@ -5,16 +5,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="574058d5-8e9c-48bd-b449-0e54473b5662" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/cynerio_assignment/core/tests.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cynerio_assignment/core/apps.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cynerio_assignment/settings/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/cynerio_assignment.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/cynerio_assignment.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cynerio_assignment/core/migrations/0001_initial.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cynerio_assignment/core/migrations/0002_remove_cyneriotask_started.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cynerio_assignment/core/migrations/0003_usercyneriotask.py" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/cynerio_assignment/core/model.py" beforeDir="false" afterPath="$PROJECT_DIR$/cynerio_assignment/core/model.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cynerio_assignment/core/serializers.py" beforeDir="false" afterPath="$PROJECT_DIR$/cynerio_assignment/core/serializers.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cynerio_assignment/core/tests.py" beforeDir="false" afterPath="$PROJECT_DIR$/cynerio_assignment/core/tests.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cynerio_assignment/core/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/cynerio_assignment/core/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cynerio_assignment/core/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/cynerio_assignment/core/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cynerio_assignment/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/cynerio_assignment/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cynerio_assignment/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/cynerio_assignment/settings/base.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cynerio_assignment/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/cynerio_assignment/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -42,6 +44,10 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "Python tests.Python tests for cynerio_assignment.core.tests.executor": "Debug",
+    "Python tests.Python tests for cynerio_core.tests.executor": "Debug",
+    "Python tests.Python tests for tests.TestAppAdmin.test_set_task_as_active.executor": "Debug",
+    "Python tests.Python tests for tests.TestAppAdmin.test_successfully_task_creation.executor": "Debug",
     "Python tests.Python tests in tests.py.executor": "Debug",
     "Python.localhost.executor": "Debug",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
@@ -56,10 +62,11 @@
       <recent name="C:\Projects\cynerio_assignment\cynerio_assignment\core" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Projects\cynerio_assignment\cynerio_assignment\settings" />
       <recent name="C:\Projects\cynerio_assignment\cynerio_assignment\core" />
     </key>
   </component>
-  <component name="RunManager" selected="Python tests.Python tests in tests.py">
+  <component name="RunManager" selected="Python tests.Python tests for cynerio_assignment.core.tests">
     <configuration name="localhost" type="PythonConfigurationType" factoryName="Python">
       <module name="cynerio_assignment" />
       <option name="ENV_FILES" value="" />
@@ -83,7 +90,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="Python tests in tests.py" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
+    <configuration name="Python tests for cynerio_assignment.core.tests" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
       <module name="cynerio_assignment" />
       <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -94,13 +101,96 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;$PROJECT_DIR$/cynerio_assignment/core/tests.py&quot;" />
+      <option name="_new_target" value="&quot;cynerio_assignment.core.tests&quot;" />
+      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
+      <method v="2" />
+    </configuration>
+    <configuration name="Python tests for cynerio_assignment.core.tests" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
+      <module name="cynerio_assignment" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="DJANGO_SETTINGS_MODULE" value="cynerio_assignment.settings" />
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/cynerio_assignment/core" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;cynerio_assignment.core.tests&quot;" />
+      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
+      <method v="2" />
+    </configuration>
+    <configuration default="true" type="tests" factoryName="Autodetect">
+      <module name="cynerio_assignment" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="C:\Projects\cynerio_assignment\venv\Scripts\python.exe" />
+      <option name="SDK_NAME" value="Python 3.12 (cynerio_assignment)" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;&quot;" />
       <option name="_new_targetType" value="&quot;PATH&quot;" />
       <method v="2" />
     </configuration>
+    <configuration default="true" type="tests" factoryName="Unittests">
+      <module name="cynerio_assignment" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="DJANGO_SETTINGS_MODULE" value="cynerio_assignment.settings" />
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="C:\Projects\cynerio_assignment\venv\Scripts\python.exe" />
+      <option name="SDK_NAME" value="Python 3.12 (cynerio_assignment)" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="_new_pattern" value="&quot;&quot;" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;cynerio_assignment.core.tests&quot;" />
+      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
+      <method v="2" />
+    </configuration>
+    <configuration default="true" type="tests" factoryName="py.test">
+      <module name="cynerio_assignment" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="DJANGO_SETTINGS_MODULE" value="cynerio_assignment.settings" />
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="C:\Projects\cynerio_assignment\venv\Scripts\python.exe" />
+      <option name="SDK_NAME" value="Python 3.12 (cynerio_assignment)" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="_new_keywords" value="&quot;&quot;" />
+      <option name="_new_parameters" value="&quot;&quot;" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;&quot;" />
+      <option name="_new_targetType" value="&quot;PATH&quot;" />
+      <method v="2" />
+    </configuration>
+    <list>
+      <item itemvalue="Python.localhost" />
+      <item itemvalue="Python tests.Python tests for cynerio_assignment.core.tests" />
+    </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Python tests.Python tests in tests.py" />
+        <item itemvalue="Python tests.Python tests for cynerio_assignment.core.tests" />
+        <item itemvalue="Python tests.Python tests for cynerio_assignment.core.tests" />
       </list>
     </recent_temporary>
   </component>
@@ -126,69 +216,24 @@
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/cynerio_assignment/core/views.py</url>
-          <line>66</line>
-          <option name="timeStamp" value="6" />
+          <url>file://$PROJECT_DIR$/cynerio_assignment/settings/base.py</url>
+          <line>15</line>
+          <option name="timeStamp" value="48" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/cynerio_assignment/core/views.py</url>
-          <line>91</line>
-          <option name="timeStamp" value="7" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/cynerio_assignment/core/model.py</url>
-          <line>38</line>
-          <option name="timeStamp" value="23" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/cynerio_assignment/core/tests.py</url>
-          <line>40</line>
-          <option name="timeStamp" value="30" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/cynerio_assignment/core/tests.py</url>
-          <line>36</line>
-          <option name="timeStamp" value="31" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/cynerio_assignment/core/tests.py</url>
-          <line>24</line>
-          <option name="timeStamp" value="32" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/cynerio_assignment/core/views.py</url>
-          <line>94</line>
-          <option name="timeStamp" value="33" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/cynerio_assignment/core/views.py</url>
-          <line>128</line>
-          <option name="timeStamp" value="39" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/cynerio_assignment/core/tests.py</url>
-          <line>23</line>
-          <option name="timeStamp" value="40" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/cynerio_assignment/core/tests.py</url>
-          <line>13</line>
-          <option name="timeStamp" value="41" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/cynerio_assignment/core/tests.py</url>
-          <line>8</line>
-          <option name="timeStamp" value="42" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/cynerio_assignment/core/tests.py</url>
+          <url>file://$PROJECT_DIR$/cynerio_assignment/settings/base.py</url>
           <line>22</line>
-          <option name="timeStamp" value="44" />
+          <option name="timeStamp" value="50" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/cynerio_assignment/core/tests.py</url>
-          <line>12</line>
-          <option name="timeStamp" value="45" />
+          <url>file://$PROJECT_DIR$/cynerio_assignment/settings/base.py</url>
+          <line>25</line>
+          <option name="timeStamp" value="51" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/cynerio_assignment/settings/base.py</url>
+          <line>27</line>
+          <option name="timeStamp" value="52" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

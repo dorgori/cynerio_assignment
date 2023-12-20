@@ -18,5 +18,5 @@ from django.urls import path, re_path, include
 
 urlpatterns = [
     re_path('admin/', admin.site.urls),
-    re_path(r'^core/', include('cynerio_assignment.core.urls')),
+    path('core/', include('cynerio_assignment.core.urls')),
 ]

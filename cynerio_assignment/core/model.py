@@ -1,12 +1,7 @@
 from datetime import datetime
 
-import django.utils.timezone
 from django.contrib.auth.models import User
 from django.db import models
-
-
-# class CynerioUser(AbstractUser):
-#     name = models.CharField(max_length=100, default='default_user')
 
 
 class CynerioTask(models.Model):
@@ -34,6 +29,9 @@ class CynerioTask(models.Model):
                         obj.minutes_spend = obj.minutes_spend + int((datetime.now() - obj.last_update).total_seconds() // 60)
                         obj.last_update = datetime.now()
                         obj.save()
+                else:
+                    obj.last_update = datetime.now()
+                    obj.save()
 
         except Exception as e:
             raise e
@@ -42,7 +40,7 @@ class CynerioTask(models.Model):
 class UserCynerioTask(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     task = models.ForeignKey(CynerioTask, on_delete=models.CASCADE)
-    last_update = models.DateTimeField(default=django.utils.timezone.now())
+    last_update = models.DateTimeField(blank=True, null=True)
     minutes_spend = models.IntegerField(default=0)
 
     def get_time_spent(self):

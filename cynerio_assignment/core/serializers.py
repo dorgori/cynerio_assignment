@@ -1,8 +1,7 @@
 
 from rest_framework import serializers
-from rest_framework.fields import SerializerMethodField
 
-from cynerio_assignment.core.model import CynerioTask, UserCynerioTask
+from cynerio_assignment.core.model import CynerioTask
 
 
 class CynerioTaskSerializer(serializers.ModelSerializer):
