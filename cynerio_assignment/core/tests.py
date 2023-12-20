@@ -54,7 +54,7 @@ class TestAppAdmin(TestCase):
         r = self.client.put(f'{self.url_prefix}/task/', data={'task_id': '30', 'active': 'true', 'user_id': json_obj['identifier']},
                             content_type="application/json")
         self.assertEqual(r.status_code, 500)
-        self.assertEqual(r.json(), 'Error while trying to update task id: 30, No CynerioTask matches the given query.')
+        self.assertEqual(r.json()['msg'], 'Error while trying to update task id: 30, No CynerioTask matches the given query.')
 
     def test_successully_set_task_as_active(self):
         # Expected 200, Succeed, and UserCynerioTask created
@@ -62,19 +62,19 @@ class TestAppAdmin(TestCase):
                             data={'task_id': '1', 'active': 'true', 'user_id': 1},
                             content_type="application/json")
         self.assertEqual(r.status_code, 200)
-        self.assertEqual(r.json(), 'Succeed')
+        self.assertEqual(r.json()['msg'], 'Succeed')
         self.assertEqual(UserCynerioTask.objects.filter(user__id=1, task__id=1, task__is_checkin=True).count(), 1)
 
         r = self.client.put(f'{self.url_prefix}/task/',
                             data={'task_id': '2', 'active': 'true', 'user_id': 1},
                             content_type="application/json")
         self.assertEqual(r.status_code, 400)
-        self.assertEqual(r.json(), 'You already have a task in progress')
+        self.assertEqual(r.json()['msg'], 'You already have a task in progress')
         r = self.client.put(f'{self.url_prefix}/task/',
                             data={'task_id': '1', 'active': 'true', 'user_id': 2},
                             content_type="application/json")
         self.assertEqual(r.status_code, 400)
-        self.assertEqual(r.json(), 'This task is already assigned to another user')
+        self.assertEqual(r.json()['msg'], 'This task is already assigned to another user')
 
     def test_report_api(self):
         # UserCynerioTask.objects.create(user=self.user_1, task=self.task_1)
