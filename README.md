@@ -10,5 +10,7 @@ install python 3.10 or higher
 
 to test the program python .\manage.py test
 
-**There is db.sqlite3 attached to see some data
+**There is db.sqlite3 attached to see some data, if prefer clean start for the db,
+    run <python manage.py flush> (in the same directory of manage.py file)
 **Use developer tools to see the backend output
+
