@@ -89,7 +89,7 @@ class TaskView(APIView):
 	@staticmethod
 	def validate_put_params(request: Request) -> Union[Tuple[int, bool], ValueError]:
 		task_id = request.data.get('task_id')
-		is_active = request.data.get('active', '').lower()
+		is_active = str(request.data.get('active', '')).lower()
 
 		if not task_id:
 			raise ValueError(f'Missing task_id parameter')
@@ -116,6 +116,9 @@ class TaskView(APIView):
 			# In case user try to set inactive task as inactive
 			if not requested_task.is_checkin:
 				raise ValueError(f'This task is already inactive')
+			# In case user try to set task that belongs to other user
+			if UserCynerioTask.objects.filter(task__id=task_id, task__is_checkin=True).exclude(user=user).exists():
+				raise ValueError(f'This task belongs to another user!')
 
 	@staticmethod
 	def validate_post_params(request: Request) -> Union[Tuple[int, bool], ValueError]:
@@ -138,15 +141,18 @@ class CynerioTaskReportView(APIView):
 		try:
 			users = User.objects.all()
 			users_tasks = UserCynerioTask.objects.filter(user__in=users)
-			users_report = 'User Report:'
+			users_report = []
 			for user in users:
+				user_report = dict({'id': user.id, 'tasks': []})
 				user_tasks = users_tasks.filter(user=user)
 				if not user_tasks:
 					continue
-				users_report += f'\n User {user.username}:'
 				for user_task in user_tasks:
 					time_spent = user_task.get_time_spent()
-					users_report += f'\n {user_task.task.name}: {time_spent}'
+					user_report['tasks'].append({'task name:': user_task.task.name, 'time spent': time_spent})
+
+				users_report.append(user_report)
+
 			return Response(users_report, status=status.HTTP_200_OK)
 		except Exception as e:
 			return Response(f'Error while fetching tasks, {e}', status=status.HTTP_500_INTERNAL_SERVER_ERROR)

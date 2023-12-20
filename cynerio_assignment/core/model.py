@@ -44,5 +44,8 @@ class UserCynerioTask(models.Model):
     minutes_spend = models.IntegerField(default=0)
 
     def get_time_spent(self):
-        return self.minutes_spend if not self.task.is_checkin else (
+        total_minutes = self.minutes_spend if not self.task.is_checkin else (
                 self.minutes_spend + int((datetime.now() - self.last_update).total_seconds() // 60))
+        hours = total_minutes // 60
+        minutes = total_minutes % 60
+        return f'{hours} hours {minutes} minutes'
