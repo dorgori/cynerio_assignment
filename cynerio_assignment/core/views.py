@@ -2,12 +2,13 @@ from typing import Union, Tuple
 
 from django.contrib.auth.models import User
 from django.utils.crypto import get_random_string
+from drf_yasg import openapi
+from drf_yasg.utils import swagger_auto_schema
 from rest_framework.generics import get_object_or_404
 from rest_framework.request import Request
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework import status
-
 
 from cynerio_assignment.core.model import CynerioTask, UserCynerioTask
 from cynerio_assignment.core.serializers import CynerioTaskSerializer
@@ -15,10 +16,11 @@ from cynerio_assignment.core.serializers import CynerioTaskSerializer
 
 class TaskView(APIView):
 	http_method_names = ['get', 'post', 'put']
-	"""
-		Return all tasks
 
-	"""
+	@swagger_auto_schema(
+	operation_description="Retrieve a list of all tasks", responses={
+			200: openapi.Response('List of tasks', CynerioTaskSerializer)}
+	)
 	def get(self, request: Request) -> Response:
 		try:
 			tasks = CynerioTask.objects.all()
@@ -27,13 +29,13 @@ class TaskView(APIView):
 		except Exception as e:
 			return Response(f'Error while fetching tasks, {e}', status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
-	"""
-		Create new task
-
-		Accepts the following parameters
-		+  name: task name, str
-	"""
-	# API to create tasks
+	@swagger_auto_schema(
+	operation_description="Create a new task",
+	request_body=openapi.Schema(
+		type=openapi.TYPE_OBJECT, properties={
+			'name': openapi.Schema(type=openapi.TYPE_STRING, description="Name of the new task")}),
+		responses={201: openapi.Response('Newly created task', CynerioTaskSerializer)}
+	)
 	def post(self, request: Request) -> Response:
 		try:
 			try:
@@ -46,20 +48,30 @@ class TaskView(APIView):
 		except Exception as e:
 			return Response(f'Error while creating new task, {e}', status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
-	"""
-		Updates task status
-
-		Accepts the following parameters
-		+  task_id: task id, int
-		+  active: true/false, str
-		+  user_id: user id, int
-	"""
+	@swagger_auto_schema(
+	operation_description="Updates the status of a task",
+	request_body=openapi.Schema(type=openapi.TYPE_OBJECT, properties={
+		'task_id': openapi.Schema(type=openapi.TYPE_INTEGER, description="ID of the task to update"),
+		'active': openapi.Schema(type=openapi.TYPE_STRING, description="True or false to activate/deactivate the task"),
+		'user_id': openapi.Schema(type=openapi.TYPE_INTEGER, description="ID of the user performing the update"),},
+								required=['task_id', 'active'],
+	responses={
+		200: openapi.Response('Task updated successfully', {'msg': 'Succeed'}),
+		400: openapi.Response('Bad request due to invalid parameters or missing user_id', openapi.Schema(
+			type=openapi.TYPE_OBJECT,
+			properties={
+				'msg': openapi.Schema(type=openapi.TYPE_STRING, description="Error message"),
+				'identifier': openapi.Schema(type=openapi.TYPE_INTEGER, description="Newly created user ID (if user_id was missing)")
+			}
+		)),
+		500: openapi.Response('Internal server error')},
+	))
 	def put(self, request: Request) -> Response:
 		try:
 			try:
 				task_id, is_checkin = self.validate_put_params(request)
 			except ValueError as e:
-				return Response(f'{e}', status=status.HTTP_400_BAD_REQUEST)
+				return Response({'msg': f'{e}'}, status=status.HTTP_400_BAD_REQUEST)
 
 			user_id = request.data.get('user_id')
 			random_suffix = get_random_string(length=6)
@@ -69,7 +81,7 @@ class TaskView(APIView):
 				password = get_random_string(length=12)
 				new_user = User.objects.create_user(username=username, password=password)
 				return Response(
-					{'msg': f'Missing user_id parameter, please use the returned identifier', 'identifier': new_user.id},
+					{'msg': f'Missing user_id parameter, please use the returned identifier','identifier': new_user.id},
 					status=status.HTTP_400_BAD_REQUEST)
 
 			user = get_object_or_404(User, id=user_id)
@@ -77,14 +89,16 @@ class TaskView(APIView):
 			try:
 				self.validate_logic(user, task_id, requested_task, is_checkin)
 			except ValueError as e:
-				return Response(f'{e}', status=status.HTTP_400_BAD_REQUEST)
+				return Response({'msg': f'{e}'}, status=status.HTTP_400_BAD_REQUEST)
 
 			requested_task.is_checkin = is_checkin
 			requested_task.save(user_id=user_id)
-			return Response(f'Succeed', status=status.HTTP_200_OK)
+			return Response({'msg': 'Succeed'}, status=status.HTTP_200_OK)
 
 		except Exception as e:
-			return Response(f'Error while trying to update task id: {task_id}, {e}', status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+			return Response({'msg': f'Error while trying to update task id: {task_id}, {e}'},
+							status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
 
 	@staticmethod
 	def validate_put_params(request: Request) -> Union[Tuple[int, bool], ValueError]:
