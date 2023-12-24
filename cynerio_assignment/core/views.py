@@ -153,18 +153,19 @@ class CynerioTaskReportView(APIView):
 	"""
 	def get(self, request: Request) -> Response:
 		try:
-			users = User.objects.all()
-			users_tasks = UserCynerioTask.objects.filter(user__in=users)
+			users_tasks = list(UserCynerioTask.objects.filter().select_related('task', 'user'))
+
+			users = [user_task.user for user_task in users_tasks]
 			users_report = []
 			for user in users:
+				print(user)
 				user_report = dict({'id': user.id, 'tasks': []})
-				user_tasks = users_tasks.filter(user=user)
+				user_tasks = [task for task in users_tasks if task.user == user]
 				if not user_tasks:
 					continue
 				for user_task in user_tasks:
 					time_spent = user_task.get_time_spent()
 					user_report['tasks'].append({'task name:': user_task.task.name, 'time spent': time_spent})
-
 				users_report.append(user_report)
 
 			return Response(users_report, status=status.HTTP_200_OK)

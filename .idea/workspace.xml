@@ -5,7 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="574058d5-8e9c-48bd-b449-0e54473b5662" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/cynerio_assignment/core/tests.py" beforeDir="false" afterPath="$PROJECT_DIR$/cynerio_assignment/core/tests.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cynerio_assignment/core/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/cynerio_assignment/core/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cynerio_assignment/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/cynerio_assignment/db.sqlite3" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cynerio_assignment/settings/base.py" beforeDir="false" afterPath="$PROJECT_DIR$/cynerio_assignment/settings/base.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cynerio_assignment/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/cynerio_assignment/urls.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -236,6 +240,21 @@
           <url>file://$PROJECT_DIR$/cynerio_assignment/core/views.py</url>
           <line>103</line>
           <option name="timeStamp" value="124" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/cynerio_assignment/core/views.py</url>
+          <line>154</line>
+          <option name="timeStamp" value="125" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/cynerio_assignment/core/views.py</url>
+          <line>163</line>
+          <option name="timeStamp" value="126" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/cynerio_assignment/core/views.py</url>
+          <line>153</line>
+          <option name="timeStamp" value="127" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
